@@ -1,0 +1,110 @@
+/*body{*/
+/*    width: 100%;*/
+/*    margin: 2% 2% 2%;*/
+/*    background-color: darkgray;*/
+/*}*/
+
+/*a{*/
+/*    font-family: fantasy;*/
+/*    font-size: x-large;*/
+/*    color: antiquewhite;*/
+/*    text-decoration: none ;*/
+/*    text-shadow: 1px 2px 1px darkolivegreen;*/
+/*    transition:0.8s;*/
+/*    margin-right: 9px;*/
+/*}*/
+
+/*a:hover{*/
+/*    color: mediumspringgreen;*/
+/*    text-shadow: 7px 7px 7px deeppink;*/
+/*    font-style: italic;*/
+/*    transition:0.3s;*/
+/*}*/
+
+/*input{*/
+/*    display: flex;*/
+/*    justify-content: flex-end;*/
+/*    flex-wrap: nowrap;*/
+/*    padding: .5em;*/
+/*}*/
+
+/*.btn{*/
+/*    margin-top: 9px;*/
+/*    box-shadow: dimgray 8px 10px 2px;*/
+/*    transition:0.8s;*/
+/*    border-style: hidden;*/
+/*    border-radius: 4px;*/
+/*    margin-bottom: 15px;*/
+/*    font-family: fantasy;*/
+
+
+/*}*/
+/*.btn:hover{*/
+/*    background-color: powderblue;*/
+/*    color: deeppink;*/
+/*    box-shadow: #8d6b79 8px 10px 2px;*/
+/*    border-style: hidden;*/
+
+/*}*/
+
+/*button{*/
+/*    border: none;*/
+/*    box-shadow: dimgray 8px 10px 2px;*/
+/*    border-radius: 4px;*/
+/*    font-family: "JetBrains Mono Light";*/
+/*}*/
+
+/*button:hover{*/
+/*    border-color: indianred;*/
+/*    box-shadow: #8d6b79 8px 10px 2px;*/
+/*    color: indianred;*/
+/*    transition:0.3s;*/
+/*}*/
+
+
+/*input{*/
+/*    margin-left: 5px;*/
+/*}*/
+/*input:focus{*/
+/*    outline:none;*/
+/*    border: 2px solid deeppink;*/
+/*    box-shadow: inset 1px 1px 4px 1px darkgray;*/
+/*}*/
+
+/*div{*/
+/*    font-size: 12px;*/
+/*}*/
+
+body{
+    padding-bottom: 25px;
+    padding-top: 35px;
+}
+
+.list{
+    margin-top: 25px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.ln{
+    color: black;
+    text-decoration: none;
+    font-style: italic;
+    color: goldenrod;
+    cursor: pointer;
+    text-shadow: black 1px 12px 7px;
+    margin-right: 15px;
+
+}
+.ln:hover {
+    color: dimgray;
+    transition: 1s;
+    text-shadow: deeppink 1px 4px 5px;
+}
+
+.area{
+    font-size: small;
+}
+
+
+

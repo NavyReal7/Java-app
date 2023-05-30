@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление индикатора</title>
+
+
+    <link th:href="@{/css/addProduct.css}" type="text/css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <!-- Bootstrap    -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+
+<!--<h3>Добавление индикатора</h3>-->
+    <nav class="navbar fixed-top bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <h3 style="cursor: default;" class="navbar-brand" href="#">Добавление индикатора</h3>
+        </div>
+    </nav>
+
+
+
+    <form class="mb-u" th:method="POST" th:action="@{/admin/product/add}" th:object="${product}" enctype="multipart/form-data">
+        <label for="exampleFormControlInput1" class="form-label">введите наименование индикатора:</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="наименование" th:field="*{title}">
+        <div style="color:deeppink" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+
+        <label for="exampleFormControlTextarea1" class="form-label">Введите описание индикатора:</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" type="text" th:field="*{description}" placeholder="описание"></textarea>
+        <!-- валидация frontend -->                                                                   <!--парный тэг-->
+        <div style="color:deeppink" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+
+        <label for="exampleFormControlInput2" class="form-label">введите цену индикатора:</label>
+        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="цена" th:field="*{price}">
+        <!-- валидация frontend -->
+        <div style="color:deeppink" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+
+        <label for="exampleFormControlInput3" class="form-label">введите платформу, на которой размещается индикатор:</label>
+        <input type="text" class="form-control" id="exampleFormControlInput3" placeholder="платформа" th:field="*{warehouse}">
+        <!-- валидация frontend -->
+        <div style="color:deeppink" th:if="${#fields.hasErrors('warehouse')}" th:errors="*{warehouse}"></div>
+
+        <label for="exampleFormControlInput4" class="form-label">выберите категорию индикатора:</label>
+        <select class="form-select" id="exampleFormControlInput4" aria-label="Default select example" th:field="*{category}">
+            <!-- цикл перебора thymeleaf(перебирается List категорий модели category -->
+            <div th:each="element : ${category}">
+                <option th:text="${element.getName()}" th:value="${element.getId()}"></option>
+            </div>
+        </select>
+        <!-- валидация frontend -->
+        <div style="color:deeppink" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+
+        <label for="exampleFormControlInput5" class="form-label">введите данные о продавце:</label>
+        <input type="text" class="form-control" id="exampleFormControlInput5" th:field="*{seller}" placeholder="продавец">
+        <!-- валидация frontend -->
+        <div style="color:deeppink" th:if="${#fields.hasErrors('seller')}" th:errors="*{seller}"></div>
+
+
+
+
+
+        <label class="form-label">Вы можете добавить до 5 фото. Первое фото не может быть пустым, так как оно является главным при выводе карточки индикатора:</label>
+        <div class="mb-3">
+            <label for="formFile" class="form-label">1 фото jpg.</label>
+            <input class="form-control form-control-sm" type="file" id="formFile" name="file_1">
+        </div>
+        <div class="mb-3">
+            <label for="formFileMultiple" class="form-label">2 фото jpg.</label>
+            <input class="form-control form-control-sm" type="file" id="formFileMultiple" multiple name="file_2">
+        </div>
+        <div class="mb-3">
+            <label for="formFileDisabled" class="form-label">3 фото jpg.</label>
+            <input class="form-control form-control-sm" type="file" id="formFileDisabled" name="file_3">
+        </div>
+        <div class="mb-3">
+            <label for="formFileSm" class="form-label">4 фото jpg.</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="file" name="file_4">
+        </div>
+        <div>
+            <label for="formFileLg" class="form-label">5 фото jpg.</label>
+            <input class="form-control form-control-sm" id="formFileLg" type="file" name="file_5">
+        </div>
+
+
+        <button style="margin-top:15px " type="submit" class="btn btn-outline-warning" value="добавить">Добавить</button>
+    </form>
+
+
+
+
+
+<!--    <p class="pp" >Вы можете добавить до 5 фото. Первое фото не может быть пустым, так как оно являеется главным при выводе карточки индикатора</p>-->
+<!--    &lt;!&ndash; тип "файл" &ndash;&gt;-->
+<!--    <input type="file" name="file_1">-->
+<!--    <input type="file" name="file_2">-->
+<!--    <input type="file" name="file_3">-->
+<!--    <input type="file" name="file_4">-->
+<!--    <input type="file" name="file_5">-->
+
+<!--    <br>-->
+<!--    <br>-->
+
+    <!-- submit - с типом "перезагрузки"  -->
+<!--    <input class = "btn" type="submit" value="добавить">-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="dv">-->
+<!--                                                         &lt;!&ndash; привязываем объект к форме для извлечения в контроллере целый объект, из которого можно получить все поля формы &ndash;&gt;-->
+<!--<form th:method="POST" th:action="@{/admin/product/add}" th:object="${product}" enctype="multipart/form-data">-->
+<!--                                                                            &lt;!&ndash;форма может работать с файлами &ndash;&gt;-->
+
+<!--    <fieldset>-->
+<!--        &lt;!&ndash; заголовок для рамки fieldset &ndash;&gt;-->
+<!--        <legend>добавьте товар:</legend>-->
+
+<!--    <label for="title">введите наименование индикатора: </label>-->
+<!--&lt;!&ndash; поле ввода тип текст с thymeleaf вводом в поле объекта класса    id для лейбла &ndash;&gt;-->
+<!--     <input type="text" th:field="*{title}" placeholder="наименование" id="title">-->
+<!--      &lt;!&ndash; валидация frontend &ndash;&gt;-->
+<!--      <div style="color:deeppink" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>-->
+
+<!--    <br>-->
+<!--    <br>-->
+
+<!--    <label for="description">введите описание индикатора: </label>-->
+<!--     &lt;!&ndash; поле ввода тип текст с thymeleaf вводом в поле объекта класса    id для лейбла &ndash;&gt;-->
+<!--     <textarea type="text" th:field="*{description}" placeholder="описание" id="description"></textarea>-->
+<!--      &lt;!&ndash; валидация frontend &ndash;&gt;                                                                   &lt;!&ndash;парный тэг&ndash;&gt;-->
+<!--      <div style="color:deeppink" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>-->
+
+<!--    <br>-->
+<!--    <br>-->
+
+<!--    <label for="price">введите цену индикатора: </label>-->
+<!--     &lt;!&ndash; поле ввода тип текст с thymeleaf вводом в поле объекта класса    id для лейбла &ndash;&gt;-->
+<!--     <input type="number" th:field="*{price}" min="1" step="0.00" placeholder="цена" id="price">-->
+<!--      &lt;!&ndash; валидация frontend &ndash;&gt;-->
+<!--      <div style="color:deeppink" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>-->
+
+<!--    <br>-->
+<!--    <br>-->
+
+<!--    <label for="warehouse">введите платформу, на которой размещается индикатор: </label>-->
+<!--     &lt;!&ndash; поле ввода тип текст с thymeleaf вводом в поле объекта класса    id для лейбла &ndash;&gt;-->
+<!--     <input type="text" th:field="*{warehouse}" min="1" step="0.00" placeholder="платформа" id="warehouse">-->
+<!--      &lt;!&ndash; валидация frontend &ndash;&gt;-->
+<!--      <div style="color:deeppink" th:if="${#fields.hasErrors('warehouse')}" th:errors="*{warehouse}"></div>-->
+
+<!--    <br>-->
+<!--    <br>-->
+
+<!--    <label for="category">выберите категорию индикатора: </label>-->
+<!--                       &lt;!&ndash; thymeleaf вводом в поле объекта класса и id для лейбла &ndash;&gt;-->
+<!--    <select name="category" th:field="*{category}" id="category">-->
+<!--    &lt;!&ndash; цикл перебора thymeleaf(перебирается List категорий модели category &ndash;&gt;-->
+<!--      <div th:each="element : ${category}">-->
+<!--          <option th:text="${element.getName()}" th:value="${element.getId()}"></option>-->
+<!--        </div>-->
+<!--    </select>-->
+<!--    &lt;!&ndash; валидация frontend &ndash;&gt;-->
+<!--    <div style="color:deeppink" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>-->
+
+<!--    <br>-->
+<!--    <br>-->
+
+<!--    <label for="seller">введите данные о продавце</label>-->
+<!--    <textarea th:field="*{seller}" placeholder="продавец" id="seller"></textarea>-->
+<!--    &lt;!&ndash; валидация frontend &ndash;&gt;-->
+<!--    <div style="color:deeppink" th:if="${#fields.hasErrors('seller')}" th:errors="*{seller}"></div>-->
+
+<!--    <br>-->
+<!--    <br>-->
+
+<!--    <p class="pp" >Вы можете добавить до 5 фото. Первое фото не может быть пустым, так как оно являеется главным при выводе карточки индикатора</p>-->
+<!--      &lt;!&ndash; тип "файл" &ndash;&gt;-->
+<!--    <input type="file" name="file_1">-->
+<!--    <input type="file" name="file_2">-->
+<!--    <input type="file" name="file_3">-->
+<!--    <input type="file" name="file_4">-->
+<!--    <input type="file" name="file_5">-->
+
+<!--    <br>-->
+<!--    <br>-->
+
+<!--            &lt;!&ndash; submit - с типом "перезагрузки"  &ndash;&gt;-->
+<!--    <input class = "btn" type="submit" value="добавить">-->
+
+<!--        </fieldset>-->
+
+</form>
+
+</div>
+
+</body>
+</html>

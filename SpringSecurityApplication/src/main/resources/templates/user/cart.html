@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+
+
+    <link th:href="@{/css/cart.css}" type="text/css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+<!-- Bootstrap    -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+
+<nav class="navbar fixed-top bg-body-tertiary">
+    <div class="container-fluid">
+        <h3 style="cursor: default;"  class="navbar-brand" href="#">Корзина товаров</h3>
+    </div>
+</nav>
+
+
+
+<div class="mb-u" th:each="product : ${cart_product}">
+
+    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+    <br>
+    <a class="ln"  style="" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>
+      <br>
+    <a style="text-decoration: none; color: goldenrod; cursor: default;" th:text="'цена: ' + ${product.getPrice()}"></a>
+    <br>
+    <a class="ln" style="" th:href="@{/cart/delete/{id}(id=${product.getId()})}">удалить товар</a>
+</div>
+
+<br>
+<a style="text-decoration: none; color: goldenrod; cursor: default; margin-left: 15px;" th:text="'итого: ' + ${price}"> </a>
+<br>
+<a class="ln" style="margin-left: 15px; font-size: larger;" href="/order/create">оформить заказ</a>
+
+
+
+
+
+
+<!-- <h3>Корзина товаров</h3>-->
+<!--      &lt;!&ndash; перебор листа товаров с помощью цикла в thymeleaf &ndash;&gt;-->
+<!-- <div th:each="product : ${cart_product}">-->
+
+<!--     &lt;!&ndash;ТЭГИ НИЖЕ БУДУТ ОТРАБАТЫВАТЬ ДЛЯ КАЖДОГО ЭЛЕМЕНТА ЛИСТА products  &ndash;&gt;-->
+
+<!--     &lt;!&ndash; 1.вывод фото.                вызываем лист с фото с массивом от числа 0,-->
+<!--                                       т.е. это первое фото, и далее метод для-->
+<!--                 спец.тэг для фото.    получения именно наименования товара &ndash;&gt;-->
+<!--     <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">-->
+<!--     <br>                                                        &lt;!&ndash;размер фото &ndash;&gt;-->
+<!--     &lt;!&ndash; 2.ссылка для вывода подробной информации о товаре &ndash;&gt;-->
+<!--     &lt;!&ndash;динамическая переменная {id}&ndash;&gt;-->
+<!--     <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>-->
+<!--     &lt;!&ndash;то, что будем присваивать в дин.переменную-это значение product(переменная, принимающая значения при переборке листа products)&ndash;&gt;-->
+<!--     &lt;!&ndash; 3.вывод цены товара &ndash;&gt;-->
+<!--     <p th:text="'цена: ' + ${product.getPrice()} "></p>-->
+
+
+<!--     &lt;!&ndash; ссылка для удаления товара под карточкой товара. &ndash;&gt;-->
+
+<!--     <a th:href="@{/cart/delete/{id}(id=${product.getId()})}">удалить товар</a>-->
+
+
+<!--     &lt;!&ndash; горизонт.полоса &ndash;&gt;-->
+<!--     <hr>-->
+
+<!-- </div>-->
+
+<!--&lt;!&ndash; Вывод суммированной цены товаров из корзины из MainController. &ndash;&gt;-->
+<!--<h3 th:text="'итого: ' + ${price}"> </h3>-->
+
+
+<!--&lt;!&ndash; Ссылка на добавление товаров из корзины в заказ(при нажатии все товары, которые в корзине, будут оформляться в один заказ.) &ndash;&gt;-->
+<!--<a href="/order/create">оформить заказ</a>-->
+
+
+
+</body>
+</html>

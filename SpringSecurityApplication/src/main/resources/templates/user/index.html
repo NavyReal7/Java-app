@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница пользователя</title>
+
+
+    <link th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+
+    <!-- Bootstrap    -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+<!-- Bootstrap    -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+
+<nav class="navbar bg-body-tertiary fixed-top">
+    <div class="container-fluid">
+        <h3 style="cursor: default;"  class="navbar-brand" href="#">Личный кабинет пользователя</h3>
+
+
+
+<!--        <li style="list-style: none" class="nav-item dropdown">-->
+<!--            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                Сортировка, поиск, фильтрация-->
+<!--            </a>-->
+<!--            <ul class="dropdown-menu">-->
+<!--                <li><a class="dropdown-item" href="#">Action</a></li>-->
+<!--                <li><a class="dropdown-item" href="#">Another action</a></li>-->
+<!--                <li><hr class="dropdown-divider"></li>-->
+<!--                <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+<!--            </ul>-->
+<!--        </li>-->
+
+
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Консоль.</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link active" aria-current="page" href="#">Home</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="#">Link</a>-->
+<!--                    </li>-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            меню
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/orders">Заказы</a></li>
+                            <li><a class="dropdown-item" href="/cart">Корзина</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/logout">Выйти из личного кабинета</a></li>
+                        </ul>
+                    </li>
+                </ul>
+<!--                <form class="d-flex mt-3" role="search">-->
+<!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--                </form>-->
+            </div>
+        </div>
+    </div>
+</nav>
+
+<form class="mb-u" th:method="POST" th:action="@{/person account/product/search}" enctype="multipart/form-data">
+    <label for="exampleFormControlInput1" class="form-label">Сортировка, поиск, фильтрация:</label>
+
+<!--    <label for="exampleFormControlInput1" class="form-label">поиск по наименованию:</label>-->
+    <input style="margin-bottom: 4px" type="text" class="form-control" id="exampleFormControlInput1" placeholder="наименование" name="search" th:value="*{value_search}">
+<!--    <label for="exampleFormControlInput2" class="form-label">цена от:</label>-->
+    <input style="margin-bottom: 4px" type="text" class="form-control" id="exampleFormControlInput2" placeholder="цена от" name="ot" th:value="*{value_price_ot}">
+<!--    <label for="exampleFormControlInput3" class="form-label">цена до:</label>-->
+    <input style="margin-bottom: 4px" type="text" class="form-control" id="exampleFormControlInput3" placeholder="цена до" name="do" th:value="*{value_price_do}">
+    <label for="exampleFormControlInput4" class="form-label">отсортировать по возрастанию цены</label>
+    <input style="margin-bottom: 4px; width: 1px;" type="radio" class="form-control" id="exampleFormControlInput4" placeholder="цена от" name="price" value="sorted_by_ascending_price">
+    <label for="exampleFormControlInput5" class="form-label">отсортировать по убыванию цены</label>
+    <input style="margin-bottom: 4px; width: 1px;" type="radio" class="form-control" id="exampleFormControlInput5" placeholder="цена до" name="price" value="sorted_by_descending_price">
+
+    <select class="form-select" aria-label="Default select example">
+        <option selected>категория товаров:</option>
+        <option value="oscillators">Осцилляторы</option>
+        <option value="trend">Трендовые</option>
+        <option value="blackbox">Индикаторы "blackbox"</option>
+    </select>
+     <br>
+<!--    <p >Доступные товары:</p>-->
+    <button style="margin-bottom: 15px;" type="submit" class="btn btn-outline-warning" value="Найти">Найти</button>
+</form>
+
+<!--<div class="mb-u" th:each="product : ${products}">-->
+<!--    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">-->
+<!--       <br>-->
+<!--    <a class="ln"  style="text-decoration: none;" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>-->
+<!--       <br>-->
+<!--    <a class="ln"  style="text-decoration: none;" th:text="'цена: ' + ${product.getPrice()}"></a>-->
+<!--       <br>-->
+<!--    <a class="ln"  style="text-decoration: none;" th:href="@{/cart/add/{id}(id=${product.getId()})}">добавьте товар в корзину</a>-->
+<!--</div>-->
+
+<p style="margin-left: 15px">Результат поиска, сортировки, фильтрации:</p>
+<div class="mb-u" th:each="product : ${search_product}">
+    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+    <br>
+    <a class="ln"  style="" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()} +'.'"></a>
+    <br>
+    <a style="text-decoration: none; color: goldenrod; cursor: default;" th:text="'цена: ' + ${product.getPrice()} +' у.е.'"></a>
+    <a class="ln" style="font-size: larger;" th:href="@{/cart/add/{id}(id=${product.getId()})}">добавьте товар в корзину</a>
+</div>
+<hr>
+<p style="margin-left: 15px">Доступные товары:</p>
+<div class="mb-u" th:each="product : ${products}">
+    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">
+      <br>
+    <a class="ln"  style="" th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()} +'.'"></a>
+      <br>
+    <a style="text-decoration: none; color: goldenrod; cursor: default;" th:text="'цена: ' + ${product.getPrice()} +' у.е.'"></a>
+      <br>
+    <a class="ln" style="font-size: larger;" th:href="@{/cart/add/{id}(id=${product.getId()})}">добавьте товар в корзину</a>
+</div>
+
+
+
+
+
+
+<!--            &lt;!&ndash; можно попробовать get, так как не идёт отправка данных. &ndash;&gt;-->
+<!--<form method="post" action="/logout">-->
+<!--    <button  type="submit">Выйти из личного кабинета</button>-->
+<!--</form>-->
+
+<!--            <br>-->
+
+<!--<div>-->
+<!--&lt;!&ndash;кнопка для перехода в корзину.&ndash;&gt;-->
+<!--                   &lt;!&ndash; для обозначения перехода "куда" используем thymeleaf th:action. &ndash;&gt;-->
+<!--<form method="get" th:action="@{/cart}">-->
+<!--    <button class = "btn"  type="submit">Корзина</button>-->
+<!--</form>-->
+
+<!--            <br>-->
+
+<!--   &lt;!&ndash; кнопка всех заказов конкретного пользователя(обрабатывается в MainController.java) &ndash;&gt;-->
+<!--     <form method="get" th:action="@{/orders}">-->
+<!--                &lt;!&ndash;тип - кнопка&ndash;&gt;-->
+<!--         <input class = "btn"  type="submit" value="Заказы">-->
+<!--     </form>-->
+
+
+
+<!--<h1>Личный кабинет</h1>-->
+
+
+<!-- МЕНЮ ФИЛЬТРАЦИИ ТОВАРОВ ------------------------------------Данная форма будет отправлена и обработанна на контроллере, где он сформирует и отправит запрос в БД на основе выбора пользователем значений в этой форме---------------------->
+
+<!--<h3>Сортировка, поиск, фильтрация</h3>-->
+
+<!--    <div class="dv">-->
+
+     <!-- форма управляется методом передачи данных POST, подключается через шаболнизатор thymeleaf -->
+                       <!--url адрес страницы, которая обрабатывает форму, подключается через шаболнизатор thymeleaf -->
+<!--<form class = "frm"  th:method="POST" th:action="@{/person account/product/search}">-->
+<!--    &lt;!&ndash; рамка &ndash;&gt;-->
+<!--    <fieldset>-->
+
+<!--        &lt;!&ndash; заголовок для рамки fieldset &ndash;&gt;-->
+<!--        <legend>Выберите параметры для поиска, сортировки, фильтрации:</legend>-->
+<!--        &lt;!&ndash; лейбл - описание поля ввода&ndash;&gt;-->
+<!--        <label for="search">поиск по наименованию</label>-->
+<!--        &lt;!&ndash; поля ввода формы                       thymeleaf с методом value для обработки данных model из ProductController&ndash;&gt;-->
+<!--        <input type="text" id="search" name="search" th:value="*{value_search}">-->
+<!--        <br>-->
+<!--        <p>цена, руб.</p>-->
+<!--        &lt;!&ndash; лейбл - описание поля ввода&ndash;&gt;-->
+<!--        <label for="ot">от</label>-->
+<!--        &lt;!&ndash; поля ввода формы                      thymeleaf с методом value для обработки данных model из ProductController&ndash;&gt;-->
+<!--        <input type="text" name="ot" id="ot" th:value="*{value_price_ot}">-->
+<!--        &lt;!&ndash; лейбл - описание поля ввода&ndash;&gt;-->
+<!--        <label for="do">до</label>-->
+<!--        &lt;!&ndash; поля ввода формы                      thymeleaf с методом value для обработки данных model из ProductController&ndash;&gt;-->
+<!--        <input type="text" name="do" id="do" th:value="*{value_price_do}">-->
+
+<!--        <br>-->
+<!--        <br>-->
+
+
+<!--             тип "radio", это кругаля кнопка-->
+<!--             одинаковое значение "name" необходимо для переключения выбора именно одного параметра из двух-->
+<!--            значение отправляется в ЛОГИКУ в ProductController-->
+<!--            <input type="radio" id="ascending_price" name="price" value="sorted_by_ascending_price">-->
+<!--            <label for="ascending_price">отсортировать по возрастанию цены</label>-->
+<!--            &lt;!&ndash;значение отправляется в ЛОГИКУ в ProductController&ndash;&gt;-->
+<!--            <input type="radio" id="descending_price" name="price" value="sorted_by_descending_price">-->
+<!--            <label for="descending_price">отсортировать по убыванию цены</label>-->
+
+<!--            <p>категория товаров: </p>           &lt;!&ndash; одинаковое значение "name" необходимо для переключения выбора именно                                      одного параметра из трёх &ndash;&gt;-->
+<!--            &lt;!&ndash; 1 категория: Осцилляторы &ndash;&gt;-->
+<!--            <input type="radio" id="oscillators" name="contract" value="oscillators">-->
+<!--            <label for="oscillators">Осцилляторы</label>-->
+<!--            &lt;!&ndash; 1 категория: Трендовые &ndash;&gt;                &lt;!&ndash;значение на ProductController &ndash;&gt;-->
+<!--            <input type="radio" id="trend" name="contract" value="trend">-->
+<!--            <label for="trend">Трендовые</label>-->
+<!--            &lt;!&ndash; 1 категория: Индикаторы "blackbox" &ndash;&gt;-->
+<!--            <input type="radio" id="blackbox" name="contract" value="blackbox">-->
+<!--            <label for="blackbox">Индикаторы "blackbox"</label>-->
+
+<!--            <br>-->
+<!--            <br>-->
+
+<!--            &lt;!&ndash; кнопка-ссылка с типом "submit", которая отправляет полученные данные с формы по указанному url на котроллер &ndash;&gt;                 &lt;!&ndash; обозначение задачи кнопки &ndash;&gt;-->
+<!--            <input class = "btn" type="submit" value="Найти">-->
+
+
+
+<!--    </fieldset>-->
+
+<!--</form>-->
+
+<!--</div>-->
+<!--            &lt;!&ndash;КОНЕЦ МЕНЮ ФИЛЬТРАЦИИ ТОВАРОВ&ndash;&gt;-->
+<!--<hr>-->
+
+<!--&lt;!&ndash; ВЫВОД РЕЗУЛЬТАТА СОРТИРОВКИ из методов ProductController и ProductRepository&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+<!--<h3>Результат поиска, сортировки, фильтрации</h3>-->
+
+<!--<div th:each="product : ${search_product}">-->
+
+<!--    &lt;!&ndash;ТЭГИ НИЖЕ БУДУТ ОТРАБАТЫВАТЬ ДЛЯ КАЖДОГО ЭЛЕМЕНТА ЛИСТА products  &ndash;&gt;-->
+
+<!--    &lt;!&ndash; 1.вывод фото.                вызываем лист с фото с массивом от числа 0,-->
+<!--                                      т.е. это первое фото, и далее метод для-->
+<!--                спец.тэг для фото.    получения именно наименования товара &ndash;&gt;-->
+<!--    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">-->
+<!--    <br>                                                        &lt;!&ndash;размер фото &ndash;&gt;-->
+<!--    &lt;!&ndash; 2.ссылка для вывода подробной информации о товаре &ndash;&gt;-->
+<!--    &lt;!&ndash;динамическая переменная {id}&ndash;&gt;-->
+<!--    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>-->
+<!--    &lt;!&ndash;то, что будем присваивать в дин.переменную-это значение product(переменная, принимающая значения при переборке листа products)&ndash;&gt;-->
+<!--    &lt;!&ndash; 3.вывод цены товара &ndash;&gt;-->
+<!--    <p th:text="'цена: ' + ${product.getPrice()} "></p>-->
+
+<!--    &lt;!&ndash; горизонт.полоса &ndash;&gt;-->
+<!--    <hr>-->
+
+<!--</div>-->
+
+
+<!--<hr>-->
+
+<!--<h3>Доступные товары: </h3>-->
+
+<!--&lt;!&ndash; аналог цикла "for"-метод(переборка значений в frontend) шаблонизатора thymeleaf &ndash;&gt;-->
+<!--&lt;!&ndash; обращаемся по данному ключу products к модели метода getAllProduct в ProductController, извлекаем лист и элементы листа, при переборе "th:each", будут класться в переменную product&ndash;&gt;-->
+<!--<div th:each="product : ${products}">-->
+
+<!--    &lt;!&ndash;ТЭГИ НИЖЕ БУДУТ ОТРАБАТЫВАТЬ ДЛЯ КАЖДОГО ЭЛЕМЕНТА ЛИСТА products  &ndash;&gt;-->
+
+<!--    &lt;!&ndash; 1.вывод фото.                вызываем лист с фото с массивом от числа 0,-->
+<!--                                      т.е. это первое фото, и далее метод для-->
+<!--                спец.тэг для фото.    получения именно наименования товара &ndash;&gt;-->
+<!--    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="300px">-->
+<!--    <br>                                                        &lt;!&ndash;размер фото &ndash;&gt;-->
+<!--    &lt;!&ndash; 2.ссылка для вывода подробной информации о товаре &ndash;&gt;-->
+<!--    &lt;!&ndash;динамическая переменная {id}&ndash;&gt;-->
+<!--    <a th:href="@{/product/info/{id}(id=${product.getId()})}" th:text="${product.getTitle()}"></a>-->
+<!--    &lt;!&ndash;то, что будем присваивать в дин.переменную-это значение product(переменная, принимающая значения при переборке листа products)&ndash;&gt;-->
+<!--    &lt;!&ndash; 3.вывод цены товара &ndash;&gt;-->
+<!--    <p th:text="'цена: ' + ${product.getPrice()} "></p>-->
+
+<!--    &lt;!&ndash; ссылка для добавления товара в корзину &ndash;&gt;-->
+<!--                                 &lt;!&ndash;инфо о товаре&ndash;&gt;-->
+<!--    <a th:href="@{/cart/add/{id}(id=${product.getId()})}">добавьте товар в корзину</a>-->
+
+<!--    &lt;!&ndash; горизонт.полоса &ndash;&gt;-->
+<!--    <hr>-->
+
+<!--</div>-->
+
+
+</body>
+</html>
+
+
+
+
+
+
