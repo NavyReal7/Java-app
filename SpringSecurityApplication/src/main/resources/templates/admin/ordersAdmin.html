@@ -24,28 +24,35 @@
 </nav>
 
 
+<!--   <div class="mb-u"  th:each="order : ${orders}">-->
+
+<!--  <img th:src="'/img/' + ${order.getProduct().getImageList()[0].getFileName()}" width="300px">-->
+
+<!--<ul class="list-group list-group-flush">-->
+<!--  <li class="list-group-item" th:text="'заказ №' + ${order.getNumber()}"></li>-->
+<!--  <li class="list-group-item" th:text="'наименование: ' + ${order.getProduct().getTitle()}"></li>-->
+<!--  <li class="list-group-item" th:text="'количество: ' + ${order.getCount()}"></li>-->
+<!--  <li class="list-group-item" th:text="'цена: ' + ${order.getPrice()}"></li>-->
+<!--  <li class="list-group-item" th:text="'дата заказа товара: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></li>-->
+<!--  <li class="list-group-item" th:text="'статус: ' + ${order.getStatus()}"></li>-->
+<!--</ul>-->
+
+<!--  <label for="exampleFormControlInput4" class="form-label">выберите статус заказа:</label>-->
+<!--  <select class="form-select" id="exampleFormControlInput4" aria-label="Default select example" th:field="*{orders}" >-->
+<!--    &lt;!&ndash; цикл перебора thymeleaf(перебирается List категорий модели category &ndash;&gt;-->
+<!--    <div th:each="element : ${orders}">-->
+<!--      <option th:text="${element.getStatus()}" th:value="${element.getId()}"></option>-->
+<!--    </div>-->
+<!--  </select>-->
+
+<!--   <button style="margin-top:15px " type="submit" class="btn btn-outline-warning" value="изменить статус">изменить статус</button>-->
+<!--  </div>-->
+
 <div class="mb-u"  th:each="order : ${orders}">
 
   <img th:src="'/img/' + ${order.getProduct().getImageList()[0].getFileName()}" width="300px">
-
-<ul class="list-group list-group-flush">
-  <li class="list-group-item" th:text="'заказ №' + ${order.getNumber()}"></li>
-  <li class="list-group-item" th:text="'наименование: ' + ${order.getProduct().getTitle()}"></li>
-  <li class="list-group-item" th:text="'количество: ' + ${order.getCount()}"></li>
-  <li class="list-group-item" th:text="'цена: ' + ${order.getPrice()}"></li>
-  <li class="list-group-item" th:text="'дата заказа товара: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></li>
-  <li class="list-group-item" th:text="'статус: ' + ${order.getStatus()}"></li>
-</ul>
-
-  <label for="exampleFormControlInput4" class="form-label">выберите статус заказа:</label>
-  <select class="form-select" id="exampleFormControlInput4" aria-label="Default select example" th:field="*{orders}" >
-    <!-- цикл перебора thymeleaf(перебирается List категорий модели category -->
-    <div th:each="element : ${orders}">
-      <option th:text="${element.getStatus()}" th:value="${element.getId()}"></option>
-    </div>
-  </select>
-
-  <button style="margin-top:15px " type="submit" class="btn btn-outline-warning" value="изменить статус">изменить статус</button>
+  <br>
+  <a class="ln" th:href="@{/order/{id}(id=${order.getId()})}" th:text="${order.getNumber()}"></a>
 </div>
 
 
@@ -55,12 +62,12 @@
 <!--<h3>Заказы:</h3>-->
 <!-- аналог цикла for в thymeleaf, перебираем лист(список) orders из метода orderUser в MainController-->
 <!--<div th:each="order : ${orders}">-->
-  <!-- вывод подробной информации в заказе -->
-  <!-- номер заказа.               метод-->
+<!-- вывод подробной информации в заказе -->
+<!-- номер заказа.               метод-->
 <!--  <h3 th:text="'заказ №' + ${order.getNumber()}"></h3>-->
-  <!-- фото заказа.        методы-->                        <!--извлекаем нулевой элемент из массива фото-->
+<!-- фото заказа.        методы-->                        <!--извлекаем нулевой элемент из массива фото-->
 <!--  <img th:src="'/img/' + ${order.getProduct().getImageList()[0].getFileName()}" width="300px">-->
-  <!-- наименование товара.              методы-->
+<!-- наименование товара.              методы-->
 <!--  <p th:text="'наименование: ' + ${order.getProduct().getTitle()}"></p>-->
 <!--  &lt;!&ndash; количество товара.              метод&ndash;&gt;-->
 <!--  <p th:text="'количество: ' + ${order.getCount()}"></p>-->
@@ -77,7 +84,7 @@
 
 
 
-  <!-- смена роли у пользователя -->
+<!-- смена роли у пользователя -->
 
 <!--  <label class="lbl" for="role">выберите статус заказа: </label>-->
 <!--  &lt;!&ndash; thymeleaf вводом в поле объекта класса и id для лейбла &ndash;&gt;-->

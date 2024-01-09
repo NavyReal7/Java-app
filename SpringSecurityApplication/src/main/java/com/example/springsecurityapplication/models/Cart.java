@@ -65,8 +65,6 @@ public class Cart {
     public void setProductId(int productId) {
         this.productId = productId;
     }
-
-
 }
 
 

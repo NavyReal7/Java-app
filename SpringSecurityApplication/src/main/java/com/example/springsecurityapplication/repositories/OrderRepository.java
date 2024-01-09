@@ -13,6 +13,6 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     //метод, получающий лист(список) заказов по объекту person.
-    //(будем получать список заказов кокретного пользователя).
+    //(будем получать список заказов конкретного пользователя).
     List<Order> findByPerson(Person person);
 }

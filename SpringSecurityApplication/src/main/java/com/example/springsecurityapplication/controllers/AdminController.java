@@ -311,118 +311,61 @@ private final OrderRepository orderRepository;
 
 
 
+//------------------------------------------------------------------------------------------07.01.24
 
-
-
-
-
-
-
-//Метод вывода заказов для администратора.---------------------------------------------мои методы добавленные-----------
-
-    //1. Метод обработки кнопки всех заказов конкретного пользователя.-------------------------------------1.
-    //public-вариант метода, который возвращает данные, в отличие от void.
-    //создаём класс модели и объект класса
-    //get запрос
-    @GetMapping("/orderAdmin")
-    public String orderUser(Model model){
-        //извлекаем объект аутентификации пользователя из сессии.
+    @GetMapping({"/orderAdmin"})
+    public String orderUser(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        //с помощью объекта personDetails получим информацию в виде объекта personDetails класса PersonDetails, который даёт полную информацию об объекте модели Person.java (по сути: из объекта аутентификации взяли объект модели Person.java. Объект аутентификации преобразовали в объект personDetails).
-        PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
-
-        //получеам лист(список) всех заказов конкретного пользователя.
-        //к листу(списку) товаров применяется из репозитория заказа метод, позволяющий получить лист(список) всех заказов по объекту person класса Person, где объект person берём из метода personDetails.
-        List<Order> orderList = orderRepository.findAll();
-
-        //таким образом, получим лист(список) всех заказов по конкретному пользователю.
-
-        //далее этот лист(список) положим в модель(в объект model класса Model), чтобы потом к ней обратиться.
+        PersonDetails personDetails = (PersonDetails)authentication.getPrincipal();
+        List<Order> orderList = this.orderRepository.findAll();
         model.addAttribute("orders", orderList);
-
-        //далее возвращаем шаблон orders в папке user templates.
         return "/admin/ordersAdmin";
     }
 
-
-    //метод редактирования(смены) статуса у заказа(30.05.23)
-    @PostMapping("/orderAdmin")
-    //принимаем объект product, валидируем его и если есть ошибки кладём их в объект bindingResult класса BindingResult                                                   и принимаем айдишник
-    public String orderUser(@ModelAttribute("orders")@Valid Order order, BindingResult bindingResult, @PathVariable("id") int id, Model model){ //добавляем объект model и класс Model модели для списка категории
-        //проверка на наличие ошибок
-        //если есть возвращаем шаблон редактирования
-        if(bindingResult.hasErrors()){
-            //передаём на шаблон список категорий после того, как прошла валидация(@Valid)
-            model.addAttribute("orders", categoryRepository.findAll());
-            return "/admin/ordersAdmin";
-        }
-        //если нет ошибок, то с помощью метода обновления передаем айдишник и объект товара.
-        orderService.updateStatusOrder(id, order );
-        return "/admin/ordersAdmin";
+    @GetMapping({"/order/{id}"})
+    public String infoOrder(@PathVariable("id") int id, Model model) {
+        model.addAttribute("orders", this.orderService.getOrderId(id));
+        return "/admin/ordersAdminInfo";
     }
 
+    @GetMapping({"/order/edit/{id}"})
+    public String editOrderStatus(@PathVariable("id") int id, Model model) {
+        model.addAttribute("edit_status", this.orderService.getOrderId(id));
+        return "/admin/ordersAdminInfoEditStatus";
+    }
 
+    @PostMapping({"/order/edit/{id}"})
+    public String editOrderStatus(@ModelAttribute("edit_status") Order order, @PathVariable("id") int id) {
+        this.orderService.updateOrderStatus(id, order);
+        return "redirect:/admin/ordersAdminInfo";
+    }
 
-
-    //2. метод вывода пользователей у админа.-------------------------------------------------------2.
-    @GetMapping("listPersonAdmin")
-    public String adminPerson(Model model){
-        //вывод всех существующих продуктов                       вывод всех продуктов из листа-списка List <Person> в                                                            объект model модели(класса) Model.
-        model.addAttribute("persons", personRepository.findAll());
+    @GetMapping({"listPersonAdmin"})
+    public String adminPerson(Model model) {
+        model.addAttribute("persons", this.personRepository.findAll());
         return "/admin/listPersonAdmin";
     }
 
-   //метод редактирования(смены) роли у пользователя(30.05.23)
-    @PostMapping("listPersonAdmin")
-    //принимаем объект product, валидируем его и если есть ошибки кладём их в объект bindingResult класса BindingResult                                                   и принимаем айдишник
-    public String adminPerson(@ModelAttribute("persons")@Valid Person person, BindingResult bindingResult, @PathVariable("id") int id, Model model){ //добавляем объект model и класс Model модели для списка категории
-        //проверка на наличие ошибок
-        //если есть возвращаем шаблон редактирования
-        if(bindingResult.hasErrors()){
-            //передаём на шаблон список категорий после того, как прошла валидация(@Valid)
-            model.addAttribute("persons", personRepository.findAll());
-            return "/admin/listPersonAdmin";
-        }
-        //если нет ошибок, то с помощью метода обновления передаем айдишник и объект товара.
+    @GetMapping({"/person/{id}"})
+    public String infoProduct(@PathVariable("id") int id, Model model) {
+        model.addAttribute("persons", this.personService.getPersonId(id));
+        return "/admin/listPersonAdminInfo";
+    }
+
+    @GetMapping({"/person/edit/{id}"})
+    public String editProduct(@PathVariable("id") int id, Model model) {
+        model.addAttribute("edit_role_person", this.personService.getPersonId(id));
+        return "/admin/listPersonAdminInfoEditRole";
+    }
+
+    @PostMapping({"/person/edit/{id}"})
+    public String edit_Product(@ModelAttribute("edit_role_person") Person person, @PathVariable("id") int id) {
         personService.updatePerson(id, person);
-        return "/admin/listPersonAdmin";
+        return "redirect:/admin/listPersonAdminInfo";
     }
+//07.01.24-------------------------------------------------------------------------------------------------------------
 
 
-
-
-
-
-
-
-
-
-
-//пытался добавить метод в котроллер для изменения роли пользователя.---(МОЯ ПОПЫТКА!)
-
-
-//-------------------- Метод зменения роли пользователя.
-
-
-//    @GetMapping("admin/product/edit/{id}")
-////инициализация класса и объекта модели
-//    public String editPersonRole(Model model, @PathVariable("id") int id){
-//
-//        model.addAttribute("persons", personService.getPersonId(id);
-//
-//        model.addAttribute("persons", personRepository.findAll());
-//        return "product/editProduct";
-//    }
-
-//------
-
-//    @PostMapping("admin/product/edit/{id}")
-//    //принимаем объект product, валидируем его и если есть ошибки кладём их в объект bindingResult класса BindingResult                                                   и принимаем айдишник
-//    public String editPersonRole(@ModelAttribute("persons")@Valid Person person, BindingResult bindingResult, @PathVariable("id") int id, Model model){ //добавляем объект model и класс Model модели для списка категории
-//
-//        productService.updatePerson(id, person);
-//        return "redirect:/admin";
-//    }
 
 
 }

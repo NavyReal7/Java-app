@@ -207,7 +207,8 @@ public class MainController {
         //ключ
         model.addAttribute("value_price_do", Do);
         //возращаем эту же страницу, но с оставшимися значениями в ней при перезагрузке, благодаря объекту model, куда и лягут значения обратно в форму страницы product.html с помощью шаблонизатора thymeleaf и его метода "th:value".
-        return "/product/product";
+        //return "/product/product";
+        return "/user/index";
 
     }
 

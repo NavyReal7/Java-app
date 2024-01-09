@@ -20,24 +20,27 @@
     </div>
 </nav>
 
-<div class="mb-u"  th:each="usEr : ${persons}">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item" th:text="'идентификатор пользователя: ' + ${usEr.getId()}"></li>
-        <li class="list-group-item" th:text="'логин пользователя: ' + ${usEr.getLogin}"></li>
-        <li class="list-group-item" th:text="'пароль пользователя: ' + ${usEr.getPassword()}"></li>
-        <li class="list-group-item" th:text="'роль пользователя в системе: ' + ${usEr.getRole()}"></li>
-    </ul>
-    <label for="exampleFormControlInput4" class="form-label">выберите роль пользователя:</label>
-    <select class="form-select" id="exampleFormControlInput4" aria-label="Default select example">
-        <!-- цикл перебора thymeleaf(перебирается List категорий модели category -->
-        <div th:each="element : ${persons}">
-            <option th:text="${element.getRole()}" th:value="${element.getId()}"></option>
-        </div>
-    </select>
+<!--<div class="mb-u"  th:each="usEr : ${persons}">-->
+<!--    <ul class="list-group list-group-flush">-->
+<!--        <li class="list-group-item" th:text="'идентификатор пользователя: ' + ${usEr.getId()}"></li>-->
+<!--        <li class="list-group-item" th:text="'логин пользователя: ' + ${usEr.getLogin}"></li>-->
+<!--        <li class="list-group-item" th:text="'пароль пользователя: ' + ${usEr.getPassword()}"></li>-->
+<!--        <li class="list-group-item" th:text="'роль пользователя в системе: ' + ${usEr.getRole()}"></li>-->
+<!--    </ul>-->
+<!--    <label for="exampleFormControlInput4" class="form-label">выберите роль пользователя:</label>-->
+<!--    <select class="form-select" id="exampleFormControlInput4" aria-label="Default select example">-->
+<!--        &lt;!&ndash; цикл перебора thymeleaf(перебирается List категорий модели category &ndash;&gt;-->
+<!--        <div th:each="element : ${persons}">-->
+<!--            <option th:text="${element.getRole()}" th:value="${element.getId()}"></option>-->
+<!--        </div>-->
+<!--    </select>-->
 
-    <button style="margin-top:15px " type="submit" class="btn btn-outline-warning" value="изменить роль">изменить роль</button>
+<!--    <button style="margin-top:15px " type="submit" class="btn btn-outline-warning" value="изменить роль">изменить роль</button>-->
+<!--</div>-->
+
+<div class="mb-u"  th:each="person : ${persons}">
+    <a class="ln" th:href="@{/person/{id}(id=${person.getId()})}" th:text="${person.getLogin()}"></a>
 </div>
-
 
 
 

@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Service
 public class PersonService{
+
     private final PersonRepository personRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -39,16 +40,17 @@ public class PersonService{
 
 //пытался добавить 2 метода в персонсервис для изменения роли пользователя.---(МОЯ ПОПЫТКА!)
 
-    //B.метод для обновления пользователя для имзенения роли(добавлен мной)
+    //B.метод для обновления пользователя для изменения роли(добавлен мной)
 
-    @Transactional                                  //объект класса Product
-    public void updatePerson(int id, Person person){
-        //устанавливаем айдишник пользователю для понимания Srping'ом Data JPA
-        person.setId(id);
-        //обновляем информацию о товаре, на основе объекта person класса Person, пришедшего с формы обновления данных
-        //метод сохранения изменений товара
-        personRepository.save(person);
-    }
+//    @Transactional                          //объект класса Person
+//    public void updatePerson(int id, Person person){
+//        //устанавливаем айдишник пользователю для понимания Spring'ом Data JPA
+//        person.setId(id);
+//        // person.setRole(id);
+//        //обновляем информацию о товаре, на основе объекта person класса Person, пришедшего с формы обновления данных
+//        //метод сохранения изменений товара
+//        personRepository.save(person);
+//    }
 
     //B.метод для получения id пользователя(добавлен мной)!
 
@@ -59,5 +61,19 @@ public class PersonService{
 //        //если товар найден по id, он возвращается, а если нет, то null
 //        return optionalPerson.orElse(null);
 //        {
+
+
+    //07.01.24------------------------------------------------------------------------
+    public Person getPersonId(int id) {
+        Optional<Person> optionalPerson = this.personRepository.findById(id);
+        return (Person)optionalPerson.orElse((Person) null);
+    }
+
+    @Transactional
+    public void updatePerson(int id, Person person) {
+        person.setId(id);
+        this.personRepository.save(person);
+    }
+
 
 }

@@ -105,13 +105,11 @@ public class Product {
 
 //СВЯЗЬ С ЗАКАЗОМ(с Order.java)-----------------!--------------------
     //указываем, что будем хранить лист(список) заказов, так как один пользователь может совершать несколько заказов.
-    //свзь "один ко многим".
+    //связь "один ко многим".
               //связь будет с полем person
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private List<Order> orderList;
 //вот так настроили связь с точки зрения модели Person---------------.
-
-
 
 
 
@@ -203,6 +201,5 @@ public class Product {
     public void setImageList(List<Image> imageList) {
         this.imageList = imageList;
     }
-
 
 }

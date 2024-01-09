@@ -1,14 +1,12 @@
 package com.example.springsecurityapplication.enumm;
 
-public enum Status {
-    Принят("принят"),
-    оформлен("оформлен"),
-    Ожидает("ожидает"),
-    Получен("получен");
+public enum RoleEnumm {
+    ROLE_ADMIN("роль админа"),
+    ROLE_USER("роль пользователя");
 
     private final String displayValue;
 
-    private Status(String displayValue) {
+    private RoleEnumm(String displayValue) {
         this.displayValue = displayValue;
     }
 
